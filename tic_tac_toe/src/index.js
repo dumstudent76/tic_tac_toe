@@ -14,7 +14,7 @@ class Board extends React.Component {
   constructor(props) {    
     super(props);    
     this.state = { 
-      squares: Array(20).fill(null), 
+      squares: Array(27).fill(null), 
       xIsNext: true, 
     };  
   }
@@ -61,24 +61,30 @@ class Board extends React.Component {
           {this.renderSquare(4)}
           {this.renderSquare(5)}
           {this.renderSquare(6)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(7)}
           {this.renderSquare(8)}
+        </div>
+        <div className="board-row">
           {this.renderSquare(9)}
           {this.renderSquare(10)}
           {this.renderSquare(11)}
           {this.renderSquare(12)}
           {this.renderSquare(13)}
-        </div>
-        <div className="board-row">
           {this.renderSquare(14)}
           {this.renderSquare(15)}
           {this.renderSquare(16)}
           {this.renderSquare(17)}
+        </div>
+        <div className="board-row">
           {this.renderSquare(18)}
           {this.renderSquare(19)}
           {this.renderSquare(20)}
+          {this.renderSquare(21)}
+          {this.renderSquare(22)}
+          {this.renderSquare(23)}
+          {this.renderSquare(24)}
+          {this.renderSquare(25)}
+          {this.renderSquare(26)}
         </div>
       </div>
     );
@@ -104,35 +110,42 @@ class Board extends React.Component {
   function calculateWinner(squares) {
     const lines = [
       [0, 1, 2],
-      [2, 3, 4],
-      [4, 5, 6],
-      [7, 8, 9],
       [9, 10, 11],
-      [11, 12, 13],
-      [14, 15, 16],
-      [16, 17, 18],
       [18, 19, 20],
-      [0, 7, 14],
-      [1, 8, 15],
-      [2, 9, 16],
-      [3, 10, 17],
-      [4, 11, 18],
-      [5, 12, 19],
-      [6, 13, 20],
-      [0, 8, 16],
-      [1, 9, 17],
+      [0, 9, 18],
+      [1, 10, 19],
+      [2, 11, 20],
+      [0, 10, 20],
       [2, 10, 18],
-      [3, 11, 19],
+      [3, 4, 5],
+      [12, 13, 14],
+      [21, 22, 23],
+      [3, 12, 21],
+      [4, 13, 22],
+      [5, 14, 23],
+      [3, 13, 23],
+      [5, 13, 21],
+      [6, 7, 8],
+      [15, 16, 17],
+      [24, 25, 26],
+      [6, 15, 24],
+      [7, 16, 25],
+      [8, 17, 26],
+      [6, 16, 26],
+      [1, 11, 21],
+      [2, 12, 22],
+      [4, 14, 24],
+      [5, 15, 25],
+      [7, 15, 23],
+      [6, 14, 22],
       [4, 12, 20],
-      [2, 8, 14],
-      [3, 9, 15],
-      [4, 10, 16],
-      [5, 11, 17],
-      [6, 12, 18],
+      [3, 11, 19]
     ];
-    for (let i = 0; i < lines.length; i++) {
-      const [a, b, c, d, e, f, g] = lines[i];
-      if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c] && squares[a] === squares[d] && squares[a] === squares[e] && squares[a] === squares[f] && squares[a] === squares[a] && squares[g]) {
+    for (let z = 0; z < lines.length; z++) {
+      const [a, b, c, d, e, f, g, h, i] = lines[z];
+      if ((squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) || 
+      (squares[d] && squares[d] === squares[d] && squares[e]=== squares[f]) ||
+       (squares[g] && squares[g] === squares[g] && squares[h] === squares[i])){
         return squares[a];
       }
     }
@@ -145,4 +158,3 @@ class Board extends React.Component {
     <Game />,
     document.getElementById('root')
   );
-  
